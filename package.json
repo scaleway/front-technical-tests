@@ -9,7 +9,6 @@
     "dev": "bun --hot react/index.jsx"
   },
   "dependencies": {
-    "bun": "^1.2.15",
     "react": "^19",
     "react-dom": "^19",
     "type-testing": "^0.2.0"

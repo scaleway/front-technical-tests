@@ -1,13 +1,16 @@
 import type { Expect, Equal } from "type-testing";
 
-type IsString = unknown;
+type IsString<T> = T extends string ? true : false;
 
 type test_IsString_string = Expect<Equal<IsString<"test">, true>>;
 type test_IsString_number = Expect<Equal<IsString<42>, false>>;
 
-type ApiRequest = unknown;
+type ApiRequest<Data, Method = "GET"> = {
+  data: Data;
+  method: Method;
+};
 
-type TSConfig = unknown;
+type TSConfig<Config = { strict: true }> = Config;
 
 type test_ApiRequest_explicitPost = Expect<
   Equal<ApiRequest<string, "POST">, { data: string; method: "POST" }>

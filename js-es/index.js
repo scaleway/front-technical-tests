@@ -1,7 +1,6 @@
-const booksStore = []
-
 // Should add addBook, getBooksByAuthor, getTitles
 const library = {
+  booksStore: []
 }
 
 

@@ -5,9 +5,6 @@
   "type": "module",
   "main": "src/index.tsx",
   "module": "src/index.tsx",
-  "scripts": {
-    "dev": "bun --hot react/index.jsx"
-  },
   "dependencies": {
     "react": "^19",
     "react-dom": "^19",

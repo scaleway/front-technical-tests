@@ -1,3 +1,6 @@
+import { StrictMode, useState, useEffect } from "react";
+import { createRoot } from "react-dom/client";
+
 const Root = () => {
   const [products, setProducts] = useState([
     {
@@ -7,7 +10,7 @@ const Root = () => {
   ]);
 
   const addToCart = (product) => {
-    setProducts([...products, product]);
+    setProducts([...products, { ...product, isInCart: true }]);
   };
 
   return (
@@ -26,7 +29,7 @@ const Root = () => {
 const ProductPage = ({ product, addToCart }) => {
   useEffect(() => {
     if (product.isInCart) {
-      showNotification(`Added ${product.name} to the shopping cart!`);
+      alert(`Added ${product.name} to the shopping cart!`);
     }
   }, [product]);
 
@@ -40,13 +43,25 @@ const ProductPage = ({ product, addToCart }) => {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        gap: 10,
+      }}
+    >
+      <p>{product.name}</p>
       <button type="button" onClick={handleBuyClick}>
         Buy
       </button>
       <button type="button" onClick={handleCheckoutClick}>
-        handleCheckoutClickt
+        Add to cart
       </button>
     </div>
   );
 };
+
+createRoot(document.getElementById("root")).render(
+  <StrictMode>
+    <Root />
+  </StrictMode>
+);

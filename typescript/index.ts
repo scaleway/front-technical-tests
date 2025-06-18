@@ -7,7 +7,7 @@ type test_IsString_number = Expect<Equal<IsString<42>, false>>;
 
 type ApiRequest = unknown;
 
-type TSConfig<Config = { strict: true }> = Config;
+type TSConfig = unknown;
 
 type test_ApiRequest_explicitPost = Expect<
   Equal<ApiRequest<string, "POST">, { data: string; method: "POST" }>

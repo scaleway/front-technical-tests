@@ -39,7 +39,7 @@ const ProductPage = ({ product, addToCart }) => {
 
   const handleCheckoutClick = () => {
     addToCart(product);
-    navigateTo("/checkout");
+    alert(`Redirect to checkout`);
   };
 
   return (

@@ -4,7 +4,7 @@ import { createRoot } from "react-dom/client";
 const Root = () => {
   const [products, setProducts] = useState([
     {
-      name: "a",
+      name: "Product 1",
       isInCart: false,
     },
   ]);
@@ -39,7 +39,7 @@ const ProductPage = ({ product, addToCart }) => {
 
   const handleCheckoutClick = () => {
     addToCart(product);
-    navigateTo("/checkout");
+    alert("/checkout");
   };
 
   return (

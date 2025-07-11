@@ -1,20 +1,51 @@
 import { StrictMode, useState, useEffect } from "react";
 import { createRoot } from "react-dom/client";
 
+const products = [
+  { id: 1, name: "Product 1", price: 1 },
+  { id: 2, name: "Product 2", price: 2 },
+  { id: 3, name: "Product 3", price: 3 },
+  { id: 4, name: "Product 4", price: 4 },
+  { id: 5, name: "Product 5", price: 5 },
+];
+
 const Root = () => {
-  const [products, setProducts] = useState([
-    {
-      name: "Product 1",
-      isInCart: false,
-    },
-  ]);
+  const [cart, setCart] = useState([products[0]]);
+  const [total, setTotal] = useState(products[0].price);
+  const [cartToSubmit, setCartToSubmit] = useState(null);
 
   const addToCart = (product) => {
-    setProducts([...products, { ...product, isInCart: true }]);
+    setCart([...cart, product]);
+  };
+
+  useEffect(() => {
+    let total = 0;
+
+    for (const temp of cart) {
+      total = total + temp.price;
+    }
+    setTotal(total);
+  }, [cart]);
+
+  useEffect(() => {
+    if (cartToSubmit !== null) {
+      alert(JSON.stringify(cartToSubmit));
+    }
+  }, [cartToSubmit]);
+
+  const handleBuy = () => {
+    setCartToSubmit(cart.map((cart) => cart.id));
   };
 
   return (
     <div>
+      <h2>Cart</h2>
+      {cart.map((cart) => (
+        <p>{cart.name}</p>
+      ))}
+      <p>TOTAL: {total}</p>
+      <button onClick={handleBuy}>BUY CART</button>
+      <h2>Products</h2>
       {products.map((product) => (
         <ProductPage
           key={product.name}
@@ -27,19 +58,13 @@ const Root = () => {
 };
 
 const ProductPage = ({ product, addToCart }) => {
-  useEffect(() => {
-    if (product.isInCart) {
-      alert(`Added ${product.name} to the shopping cart!`);
-    }
-  }, [product]);
-
   const handleBuyClick = () => {
     addToCart(product);
+    alert("/checkout");
   };
 
-  const handleCheckoutClick = () => {
+  const handleCartClick = () => {
     addToCart(product);
-    alert("/checkout");
   };
 
   return (
@@ -50,10 +75,11 @@ const ProductPage = ({ product, addToCart }) => {
       }}
     >
       <p>{product.name}</p>
+      <p>{product.price}</p>
       <button type="button" onClick={handleBuyClick}>
-        Buy
+        Add to cart and Buy
       </button>
-      <button type="button" onClick={handleCheckoutClick}>
+      <button type="button" onClick={handleCartClick}>
         Add to cart
       </button>
     </div>
@@ -63,5 +89,5 @@ const ProductPage = ({ product, addToCart }) => {
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Root />
-  </StrictMode>
+  </StrictMode>,
 );

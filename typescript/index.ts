@@ -7,8 +7,6 @@ type test_IsString_number = Expect<Equal<IsString<42>, false>>;
 
 type ApiRequest = unknown;
 
-type TSConfig = unknown;
-
 type test_ApiRequest_explicitPost = Expect<
   Equal<ApiRequest<string, "POST">, { data: string; method: "POST" }>
 >;
@@ -16,6 +14,8 @@ type test_ApiRequest_explicitPost = Expect<
 type test_ApiRequest_implicitGet = Expect<
   Equal<ApiRequest<number>, { data: number; method: "GET" }>
 >;
+
+type TSConfig = unknown;
 
 type test_TSConfig_default = Expect<Equal<TSConfig, { strict: true }>>;
 

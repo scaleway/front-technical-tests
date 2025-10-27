@@ -1,13 +1,14 @@
-// Should add addBook, getBooksByAuthor, getTitles, openNewLibrary
+// TODO: You need to implement addBook, getBooksByAuthor, getTitles, openNewLibrary functions to make the code below works
 const library = {
   booksStore: [],
 };
 
-// Should return title - author
+// TODO: Should return title - author
 function getFormatedTitle(book) {
   return "";
 }
 
+// You dont need to edit this function
 function fetchBooks() {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -26,11 +27,13 @@ function fetchBooks() {
 }
 
 (async () => {
-  // add books to library with the fetchBooks return
+  // TODO: Add books to library object with the fetchBooks return
 
+  // This should output good values
   console.log(library.getTitles());
   console.log(library.getBooksByAuthor("George Orwell"));
 
+  // Its a new library so its a copy of the old one but we can add book seperately in each of them
   const newLibrary = library.openNewLibrary();
   newLibrary.addBook({
     title: "Foundation",
@@ -38,5 +41,6 @@ function fetchBooks() {
     year: 1951,
   });
 
+  // Should have 4 books in newLibrary and 3 books in library
   console.log(newLibrary.getTitles(), library.getTitles());
 })();
